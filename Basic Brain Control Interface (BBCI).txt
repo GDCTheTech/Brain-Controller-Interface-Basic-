@@ -1,0 +1,41 @@
+Python
+import numpy as np
+import pygame
+
+# Initialize the pygame library
+pygame.init()
+
+# Create a screen object
+screen = pygame.display.set_mode((800, 600))
+
+# Create a text object
+text = pygame.font.SysFont("Arial", 20)
+
+# Initialize the brain control interface
+bc = BrainControlInterface()
+
+# Start the main loop
+while True:
+
+    # Get the brain activity data
+    activity = bc.get_activity()
+
+    # Convert the brain activity data into a command
+    command = bc.get_command(activity)
+
+    # Update the text object
+    text.render("Command: " + command, True, (0, 0, 0))
+
+    # Draw the text object on the screen
+    screen.blit(text.rect, (0, 0))
+
+    # Update the screen
+    pygame.display.update()
+
+    # Check for events
+    for event in pygame.event.get():
+
+        # If the user quits, exit the program
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
